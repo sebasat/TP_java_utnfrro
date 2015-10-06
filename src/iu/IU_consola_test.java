@@ -11,6 +11,8 @@ import excepciones.AppExceptions;
 
 import negocio.CtrlJuego;
 
+
+//esta clase ya no sirve para nada
 public class IU_consola_test {
 	
 	CtrlJuego ctrl = new CtrlJuego();
