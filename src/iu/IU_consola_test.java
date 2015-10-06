@@ -1,6 +1,5 @@
 package iu;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -15,7 +14,7 @@ import negocio.CtrlJuego;
 //esta clase ya no sirve para nada
 public class IU_consola_test {
 	
-	CtrlJuego ctrl = new CtrlJuego();
+	CtrlJuego ctrl = CtrlJuego.getInstancia();
 	
 	public static void main(String [] args){
 		
