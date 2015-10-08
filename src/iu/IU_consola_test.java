@@ -11,7 +11,8 @@ import excepciones.AppExceptions;
 import negocio.CtrlJuego;
 
 
-//esta clase ya no sirve para nada
+/*interfaz de prueba*/
+
 public class IU_consola_test {
 	
 	CtrlJuego ctrl = CtrlJuego.getInstancia();

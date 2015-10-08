@@ -3,22 +3,16 @@ package iu;
 import entidades.*;
 import excepciones.AppExceptions;
 import negocio.CtrlJuego;
-import java.text.ParseException;
 import java.util.Map;
-
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.text.MaskFormatter;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Color;
+import java.awt.Font;
 
 public class Ajedrez_juego extends JDialog {
 
@@ -28,12 +22,8 @@ public class Ajedrez_juego extends JDialog {
 	private static final long serialVersionUID = 1L;
     private Partida partida;
     private JLabel labelMuestraTurno, lblsetDni1, lblsetDni2, lbl_muestra_ganador;
-	private MaskFormatter formato;
 	private CtrlJuego ctrl;
 	Tablero tablero;
-	private  JFormattedTextField txtFldOrigen;
-	private JFormattedTextField txtFldDestino;
-	private JButton btnMover;
 	/**
 	 * Create the dialog.
 	 */
@@ -49,87 +39,50 @@ public class Ajedrez_juego extends JDialog {
         getContentPane().add(tablero);
 		setSize(tablero.imgFondo.getWidth(null), tablero.imgFondo.getHeight(null));
         
-		//inicio-- formato de entrada para los campos de texto origen y destino(de a a b y de 1 a 8)
-		try{
-			formato = new MaskFormatter("L#");
-		}catch(ParseException pe){
-			
-		}
-		formato.setValidCharacters("abcdefgh12345678");
-		txtFldOrigen = new JFormattedTextField(formato);
-		txtFldOrigen.setFocusLostBehavior(JFormattedTextField.COMMIT);
-		txtFldOrigen.setToolTipText("Ingresa ColumnaFila, ej: c2");
-		txtFldOrigen.setBounds(102, 278, 28, 19);
-		tablero.add(txtFldOrigen);
-		txtFldOrigen.setColumns(10);
-		
-		txtFldDestino = new JFormattedTextField(formato);
-		txtFldDestino.setFocusLostBehavior(JFormattedTextField.COMMIT);
-		txtFldDestino.setToolTipText("Ingresa ColumnaFila, ej: c2");
-		txtFldDestino.setBounds(102, 317, 28, 19);
-		tablero.add(txtFldDestino);
-		txtFldDestino.setColumns(10);
-		//fin-- formato de entrada para los campos de texto
-		
 		
 		JLabel lblJugador1 = new JLabel("Jugador 1:");
+		lblJugador1.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblJugador1.setForeground(Color.WHITE);
-		lblJugador1.setBounds(12, 53, 83, 15);
+		lblJugador1.setBounds(12, 53, 110, 22);
 		tablero.add(lblJugador1);
 		
 		JLabel lblJugador2 = new JLabel("Jugador 2:");
-		lblJugador2.setBounds(12, 84, 83, 15);
+		lblJugador2.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblJugador2.setBounds(12, 124, 110, 22);
 		tablero.add(lblJugador2);
 		
 		lblsetDni1 = new JLabel("New label");
+		lblsetDni1.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblsetDni1.setForeground(Color.WHITE);
-		lblsetDni1.setBounds(102, 53, 105, 15);
+		lblsetDni1.setBounds(134, 53, 138, 22);
 		tablero.add(lblsetDni1);
 		
 		lblsetDni2 = new JLabel("New label");
-		lblsetDni2.setBounds(102, 84, 105, 15);
+		lblsetDni2.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblsetDni2.setBounds(134, 124, 138, 22);
 		tablero.add(lblsetDni2);
 		
-		JLabel lblGanador = new JLabel("Ganador:");
-		lblGanador.setForeground(Color.BLUE);
-		lblGanador.setBounds(12, 147, 70, 15);
+		JLabel lblGanador = new JLabel("Ganador");
+		lblGanador.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblGanador.setForeground(new Color(0, 204, 255));
+		lblGanador.setBounds(12, 213, 95, 22);
 		tablero.add(lblGanador);
 		
 		lbl_muestra_ganador = new JLabel("");
-		lbl_muestra_ganador.setBounds(102, 147, 105, 15);
+		lbl_muestra_ganador.setFont(new Font("Dialog", Font.BOLD, 18));
+		lbl_muestra_ganador.setBounds(134, 213, 146, 22);
 		tablero.add(lbl_muestra_ganador);
 		
-		JLabel lblTurno = new JLabel("Turno:");
+		JLabel lblTurno = new JLabel("Turno");
+		lblTurno.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblTurno.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTurno.setBounds(12, 212, 70, 15);
+		lblTurno.setBounds(12, 300, 83, 28);
 		tablero.add(lblTurno);
 		
 		labelMuestraTurno = new JLabel("New label");
-		labelMuestraTurno.setBounds(102, 212, 105, 15);
+		labelMuestraTurno.setFont(new Font("Dialog", Font.BOLD, 18));
+		labelMuestraTurno.setBounds(134, 303, 121, 22);
 		tablero.add(labelMuestraTurno);
-		
-		JLabel lblOrigen = new JLabel("Origen:");
-		lblOrigen.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblOrigen.setBounds(25, 280, 70, 15);
-		tablero.add(lblOrigen);
-		
-		JLabel lblDestino = new JLabel("Destino:");
-		lblDestino.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDestino.setBounds(25, 319, 70, 15);
-		tablero.add(lblDestino);
-		
-		
-		btnMover = new JButton("Mover");
-		btnMover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(coordenadasLleno()) {
-					//getMovimiento();
-					tablero.repaint();
-				}
-			}
-		});
-		btnMover.setBounds(151, 298, 83, 25);
-		tablero.add(btnMover);
 		
 		
 		//listener para guardar partida al cerrar ventana
@@ -182,15 +135,6 @@ public class Ajedrez_juego extends JDialog {
 	
 	
 	
-	//evita q se ingresen espacios en blanco en las cajas origen-destino
-	protected boolean coordenadasLleno(){
-    	if(txtFldOrigen.getText().trim().length()<2 || txtFldDestino.getText().trim().length()<2){
-			JOptionPane.showMessageDialog(getContentPane(), "Ingresar coordenadas","Aviso", JOptionPane.INFORMATION_MESSAGE);
-			return false;
-		} else return true;
-    }
-	
-	
 	
 	//guarda la partida en curso, si se cargo una partida q estaba terminada, no la vuelve a guardar al cerrar la ventana 
 	public void guardarPartida(){
@@ -206,7 +150,8 @@ public class Ajedrez_juego extends JDialog {
 	
 	
 	
-	//si la partida esta finalizada se desactiva el boton mover e imprime el ganador
+	
+	//si la partida esta finalizada se desactiva la ventana e imprime el ganador
 	public void checkPartidaFinalizada(){
 		
 		if(ctrl.getGameState()=='F'){
