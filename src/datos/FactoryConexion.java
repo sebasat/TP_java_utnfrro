@@ -46,7 +46,8 @@ public class FactoryConexion {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			System.out.println("Error al conectarse a la BD");
+			throw new RuntimeException("Error en el servidor de BD, contactese con el admin del sistema");
+			//System.out.println("Error al conectarse a la BD");
 		}
 		return conn;
 	}

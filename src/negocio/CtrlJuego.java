@@ -381,6 +381,12 @@ public class CtrlJuego {
     public Partida getXnroPartida(int nro){
     	return datosJuego.getXnroPart(nro);
     }
+    
+    
+    
+    public void registrarJugador(Jugador j) throws AppExceptions{
+    	datosJuego.guardarJugador(j);
+    }
 
 
 }

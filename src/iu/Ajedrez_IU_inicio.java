@@ -202,6 +202,9 @@ public class Ajedrez_IU_inicio {
 				// TODO Auto-generated catch block
 				e.getMessage();
 				return null;
+			} catch (RuntimeException re){
+				JOptionPane.showMessageDialog(ventanaPrincipal.getContentPane(), re.getMessage(),"Aviso", JOptionPane.INFORMATION_MESSAGE);
+			    return null;
 			}
 		
 	}
@@ -254,8 +257,8 @@ public class Ajedrez_IU_inicio {
     //inicia nueva partida al presionar boton "Nueva" y la devuelve a la ventana del juego para setearla
     public Partida iniciarPartidaNueva(){
     	Partida p = null;
-    	if(esJugadorRegistrado(txtJug1.getText(), txtJug2.getText())){
-		    	p = new Partida();
+    	if(esJugadorRegistrado(txtJug1.getText()) && esJugadorRegistrado(txtJug2.getText())){    	
+    	        p = new Partida();
 		    	Jugador j1 = new Jugador();
 		    	j1.setDni(Integer.parseInt(txtJug1.getText()));
 				Jugador j2 = new Jugador();
@@ -281,13 +284,32 @@ public class Ajedrez_IU_inicio {
     
     
     //valida q los jugadores esten registrados en el sistema, si no lo estan, no comienza la partida
-    public boolean esJugadorRegistrado(String dni1, String dni2){
+    public boolean esJugadorRegistrado(String dni){
+    	;
+    	if(ctrl.buscarJugadorXDni(Integer.parseInt(dni))== null){
+    		int rta = JOptionPane.showConfirmDialog(ventanaPrincipal, "Jugador no registrado, ¿desea registrarse?", "Aviso", JOptionPane.YES_NO_OPTION);
+            if (rta == JOptionPane.YES_OPTION) {
+                  registrarJugador(dni);
+            }
+            else {
+               return false;
+            }
+    	}
+    	return true;
+    		
     	
-    	if(ctrl.buscarJugadorXDni(Integer.parseInt(dni1))== null || ctrl.buscarJugadorXDni(Integer.parseInt(dni2))== null){
-    		JOptionPane.showMessageDialog(ventanaPrincipal.getContentPane(), "Jugador no registrado en el sistema","Aviso", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-    	} else return true;
+    }
+    
+    
+    
+    
+    //abre un jdialog para ingresar datos del jugador
+    public void registrarJugador(String dni){
     	
+    	RegistrarJugador ventana_registro = new RegistrarJugador(ventanaPrincipal,true);
+    	ventana_registro.setDniEnPantalla(dni);
+    	ventana_registro.setLocationRelativeTo(ventanaPrincipal);
+    	ventana_registro.setVisible(true);
     }
     
     

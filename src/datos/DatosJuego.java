@@ -338,4 +338,39 @@ public class DatosJuego {
 			  }
 			 return j;
 		}
+		
+		
+		
+		
+		//guardar jugador 
+		public void guardarJugador(Jugador j) throws AppExceptions{
+					ResultSet rs=null;
+					PreparedStatement statement=null;
+			        
+					try {
+			        	statement = FactoryConexion.getInstancia().getConn().prepareStatement("insert into Jugador (DNI, Apellido, Nombre) values (?,?,?)");
+			            statement.setInt(1, j.getDni());
+			            statement.setString(2, j.getApellido());
+			            statement.setString(3, j.getNombre());
+			            
+			            statement.execute();
+			            
+			            
+			        } catch (SQLException ex) {
+			            ex.printStackTrace();
+			            throw new AppExceptions("Error al guardar Jugador", ex);
+			        }
+			        finally{
+						
+						try {
+							if(rs!=null ) rs.close();
+							if(statement != null) statement.close();
+						} catch (SQLException e) {
+							 
+						}
+						
+						FactoryConexion.getInstancia().releaseConn();
+					}
+			 
+		}
 }
