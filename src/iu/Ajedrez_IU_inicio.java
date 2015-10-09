@@ -314,6 +314,7 @@ public class Ajedrez_IU_inicio {
     
     
     
+    
     //setea una partida(nueva o cargada) en la ventana ajedrez_juego y agrega listener para q cuando se cierre el jdialog
     //se actualice la tabla
     public void setPartidaEnJuego(Partida p){
